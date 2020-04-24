@@ -89,7 +89,7 @@ public class WxuserLoginServiceImpl implements WxuserLoginService {
         //微信端登录code
         String wxCode = code;
         String requestUrl = "https://api.weixin.qq.com/sns/jscode2session";
-        String urlParam="appid=wx2d2bdaf87b16c076&secret=00958db55259ba7e082a7ead0b73263f&js_code="+code+"&grant_type=authorization_code";
+        String urlParam="appid=&js_code="+code+"&grant_type=authorization_code";
         //发送post请求读取调用微信接口获取openid用户唯一标识
         JSONObject jsonObject = JSON.parseObject( HttpUtils.sendGet(requestUrl,urlParam));
         return jsonObject;
