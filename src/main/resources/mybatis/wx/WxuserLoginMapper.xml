@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.charming.project.wx.mapper.WxuserLoginMapper">
+
+
+
+
+    <resultMap type="WxUser" id="WxUserResult">
+        <id     property="id"          column="id"          />
+        <result property="openid"        column="openid"        />
+        <result property="sessionKey"       column="session_key"       />
+        <result property="nickName"   column="nickName"   />
+        <result property="avatarUrl" column="avatarUrl" />
+        <result property="gender"  column="gender"  />
+        <result property="country"     column="country"      />
+        <result property="province"         column="province"          />
+        <result property="city"       column="city"       />
+        <result property="joinTime"     column="joinTime"     />
+        <result property="lastTime"       column="lastTime"       />
+    </resultMap>
+
+
+    <select id="selectuserLogin" parameterType="string" resultMap="WxUserResult">
+        select id,openid,session_key,nickName,avatarUrl,gender,country,province,city,joinTime,lastTime
+        from wx_user
+        <where>
+           #{openid}=openid
+
+        </where>
+    </select>
+
+    <insert id="adduserLogin" parameterType="WxUser" useGeneratedKeys="true" keyProperty="id">
+        insert into wx_user(
+        <if test="openid != null and openid != ''">openid,</if>
+        <if test="sessionKey != null and sessionKey != ''">session_key,</if>
+        <if test="nickName != null and nickName != ''">nickName,</if>
+        <if test="avatarUrl != null and avatarUrl != ''">avatarUrl,</if>
+        <if test="gender != null and gender != ''">gender,</if>
+        <if test="country != null and country != ''">country,</if>
+        <if test="province != null and province != ''">province,</if>
+        <if test="city != null and city != ''">city,</if>
+        <if test="joinTime != null ">joinTime,</if>
+        <if test="lastTime != null ">lastTime</if>
+        )values(
+        <if test="openid != null and openid != ''">#{openid},</if>
+        <if test="sessionKey != null and sessionKey != ''">#{sessionKey},</if>
+        <if test="nickName != null and nickName != ''">#{nickName},</if>
+        <if test="avatarUrl != null and avatarUrl != ''">#{avatarUrl},</if>
+        <if test="gender != null and gender != ''">#{gender},</if>
+        <if test="country != null and country != ''">#{country},</if>
+        <if test="province != null and province != ''">#{province},</if>
+        <if test="city != null and city != ''">#{city},</if>
+        <if test="joinTime != null ">#{joinTime},</if>
+        <if test="lastTime != null ">#{lastTime}</if>
+        )
+    </insert>
+
+    <update id="uodateuserLogin" parameterType="WxUser">
+        update wx_user
+        <set>
+            <if test="openid != null and openid != ''">openid=#{openid},</if>
+            <if test="sessionKey != null and sessionKey != ''">session_key=#{sessionKey},</if>
+            <if test="nickName != null and nickName != ''">nickName=#{nickName},</if>
+            <if test="avatarUrl != null and avatarUrl != ''">avatarUrl=#{avatarUrl},</if>
+            <if test="gender != null and gender != ''">gender=#{gender},</if>
+            <if test="country != null and country != ''">country=#{country},</if>
+            <if test="province != null and province != ''">province=#{province},</if>
+            <if test="city != null and city != ''">city=#{city},</if>
+            <if test="lastTime != null ">lastTime=#{lastTime},</if>
+        </set>
+        where id = #{id}
+    </update>
+
+
+</mapper>
